@@ -67,13 +67,13 @@ std::string infx2pstfx(const std::string& inf) {
 
 int eval(const std::string& pref) {
     TStack<int, 100> st;
-    for (size_t i = 0; i < post.size(); ++i) {
-        char c = post[i];
+    for (size_t i = 0; i < pref.size(); ++i) {
+        char c = pref[i];
         if (c == ' ') 
             continue;
         if (isdigit(c)) {
             int num = 0;
-            while (i < post.size() && isdigit(post[i])) {
+            while (i < pref.size() && isdigit(pref[i])) {
                 num = num * 10 + (post[i] - '0');
                 i++;
             }
