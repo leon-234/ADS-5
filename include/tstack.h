@@ -10,15 +10,32 @@ private:
 public:
     TStack() : topIndex(-1) {}
 
-    void push(T& value) {
+    bool isEmpty() const {
+        return topIndex == -1;
+    }
+
+    bool isFull() const {
+        return topIndex == size - 1;
+    }
+
+    void push(const T& value) {
+        if (isFull()) {
+            throw std::overflow_error("Stack overflow");
+        }
         data[++topIndex] = value;
     }
 
     void pop() {
+        if (isEmpty()) {
+            throw std::underflow_error("Stack underflow");
+        }
         topIndex--;
     }
 
-    T top() {
+    T top() const {
+        if (isEmpty()) {
+            throw std::underflow_error("Stack is empty");
+        }
         return data[topIndex];
     }
 
