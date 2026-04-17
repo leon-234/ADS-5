@@ -4,9 +4,9 @@
 #include "tstack.h"
 
 int priority(char op) {
-    if (op == '+' || op == '-') 
+    if (op == '+' || op == '-')
         return 1;
-    else if (op == '*' || op == '/') 
+    else if (op == '*' || op == '/')
         return 2;
     return 0;
 }
@@ -30,7 +30,7 @@ std::string infx2pstfx(const std::string& inf) {
     std::string result;
     for (size_t i = 0; i < inf.size(); ++i) {
         char c = inf[i];
-        if (c == ' ') 
+        if (c == ' ')
             continue;
         if (isdigit(c)) {
             while (i < inf.size() && isdigit(inf[i])) {
@@ -69,12 +69,12 @@ int eval(const std::string& pref) {
     TStack<int, 100> st;
     for (size_t i = 0; i < pref.size(); ++i) {
         char c = pref[i];
-        if (c == ' ') 
+        if (c == ' ')
             continue;
         if (isdigit(c)) {
             int num = 0;
             while (i < pref.size() && isdigit(pref[i])) {
-                num = num * 10 + (post[i] - '0');
+                num = num * 10 + (pref[i] - '0');
                 i++;
             }
             st.push(num);
