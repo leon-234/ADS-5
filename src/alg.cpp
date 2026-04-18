@@ -1,4 +1,6 @@
+// Copyright 2025 NNTU-CS
 #include <string>
+#include <map>
 #include <cctype>
 #include "tstack.h"
 
@@ -12,7 +14,7 @@ int apply(int a, int b, char op) {
     if (op == '+') return a + b;
     if (op == '-') return a - b;
     if (op == '*') return a * b;
-    if (op == '/') return a / b; 
+    if (op == '/') return a / b;
     return 0;
 }
 
@@ -57,6 +59,10 @@ std::string infx2pstfx(const std::string& inf) {
         ops.pop();
     }
 
+    if (!result.empty() && result.back() == ' ') {
+        result.pop_back();
+    }
+    
     return result;
 }
 
