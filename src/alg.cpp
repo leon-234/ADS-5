@@ -1,37 +1,30 @@
-// Copyright 2025 NNTU-CS
 #include <string>
-#include <map>
+#include <cctype>
 #include "tstack.h"
 
 int priority(char op) {
-    if (op == '+' || op == '-')
-        return 1;
-    else if (op == '*' || op == '/')
-        return 2;
+    if (op == '+' || op == '-') return 1;
+    if (op == '*' || op == '/') return 2;
     return 0;
 }
 
 int apply(int a, int b, char op) {
-    switch (op) {
-    case '+':
-        return a + b;
-    case '-':
-        return a - b;
-    case '*':
-        return a * b;
-    case '/':
-        return a / b;
-    }
+    if (op == '+') return a + b;
+    if (op == '-') return a - b;
+    if (op == '*') return a * b;
+    if (op == '/') return a / b; 
     return 0;
 }
 
 std::string infx2pstfx(const std::string& inf) {
     TStack<char, 100> ops;
     std::string result;
+
     for (size_t i = 0; i < inf.size(); ++i) {
         char c = inf[i];
-        if (c == ' ')
-            continue;
+
+        if (c == ' ') continue;
+
         if (isdigit(c)) {
             while (i < inf.size() && isdigit(inf[i])) {
                 result += inf[i];
@@ -47,7 +40,7 @@ std::string infx2pstfx(const std::string& inf) {
                 result += ' ';
                 ops.pop();
             }
-            ops.pop(); // убрать '('
+            ops.pop();
         } else {
             while (!ops.isEmpty() && priority(ops.top()) >= priority(c)) {
                 result += ops.top();
@@ -57,24 +50,28 @@ std::string infx2pstfx(const std::string& inf) {
             ops.push(c);
         }
     }
+
     while (!ops.isEmpty()) {
         result += ops.top();
         result += ' ';
         ops.pop();
     }
+
     return result;
 }
 
-int eval(const std::string& pref) {
+int eval(const std::string& post) {
     TStack<int, 100> st;
-    for (size_t i = 0; i < pref.size(); ++i) {
-        char c = pref[i];
-        if (c == ' ')
-            continue;
+
+    for (size_t i = 0; i < post.size(); ++i) {
+        char c = post[i];
+
+        if (c == ' ') continue;
+
         if (isdigit(c)) {
             int num = 0;
-            while (i < pref.size() && isdigit(pref[i])) {
-                num = num * 10 + (pref[i] - '0');
+            while (i < post.size() && isdigit(post[i])) {
+                num = num * 10 + (post[i] - '0');
                 i++;
             }
             st.push(num);
@@ -82,9 +79,11 @@ int eval(const std::string& pref) {
         } else {
             int b = st.top(); st.pop();
             int a = st.top(); st.pop();
+
             int res = apply(a, b, c);
             st.push(res);
         }
     }
+
     return st.top();
 }
