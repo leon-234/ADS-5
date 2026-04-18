@@ -1,6 +1,6 @@
 // Copyright 2021 NNTU-CS
-#ifndef TSTACK_H
-#define TSTACK_H
+#ifndef INCLUDE_TSTACK_H_
+#define INCLUDE_TSTACK_H_
 
 #include <stdexcept>
 
@@ -51,4 +51,4 @@ class TStack {
     }
 };
 
-#endif // TSTACK_H
+#endif // INCLUDE_TSTACK_H_
