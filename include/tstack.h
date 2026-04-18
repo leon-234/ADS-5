@@ -1,13 +1,13 @@
 // Copyright 2021 NNTU-CS
-#ifndef INCLUDE_TSTACK_H_
-#define INCLUDE_TSTACK_H_
+#ifndef TSTACK_H
+#define TSTACK_H
 
 #include <stdexcept>
 
-template<typename T, int maxSize>
+template <typename T, int MaxSize>
 class TStack {
  private:
-    T data[maxSize];
+    T data[MaxSize];
     int topIndex;
 
  public:
@@ -18,7 +18,7 @@ class TStack {
     }
 
     bool isFull() const {
-        return topIndex == maxSize - 1;
+        return topIndex == MaxSize - 1;
     }
 
     void push(const T& value) {
@@ -51,4 +51,4 @@ class TStack {
     }
 };
 
-#endif  // INCLUDE_TSTACK_H_
+#endif // TSTACK_H
