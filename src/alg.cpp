@@ -62,7 +62,6 @@ std::string infx2pstfx(const std::string& inf) {
     if (!result.empty() && result.back() == ' ') {
         result.pop_back();
     }
-    
     return result;
 }
 
